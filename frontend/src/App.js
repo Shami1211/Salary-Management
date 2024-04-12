@@ -1,14 +1,16 @@
 import React from "react";
 import { Route, Routes } from "react-router";
 
+//Admin Dashboard
 import AdminLogin from "./Components/Finance/Admin/AdminLogin/AdminLogin";
-import FHome from "./Components/Finance/User/FHome/FHome";
+import FHome from "./Components/Finance/FHome/FHome";
 
-import PlayerSalaryForm from "./Components/Finance/Admin/Lecturer/LecturerSalaryForm";
-import PlayerDetails from "./Components/Finance/Admin/Player/PlayerDetails";
-import AddSalary from "./Components/Finance/Admin/Player/AddSalary";
+//Worker
+import WorkerSalaryForm from "./Components/Finance/Admin/Worker/WorkerSalaryForm";
+import WorkerDetails from "./Components/Finance/Admin/Worker/WorkerDetails";
+import AddSalary from "./Components/Finance/Admin/Worker/AddSalary";
 
-
+//Lecture
 import LecturerSalaryForm from "./Components/Finance/Admin/Lecturer/LecturerSalaryForm";
 import LecturerDetails from "./Components/Finance/Admin/Lecturer/LecturerDetails";
 import AddLecturerSalary from "./Components/Finance/Admin/Lecturer/AddLectureSalary";
@@ -28,8 +30,8 @@ function App() {
           <Route path="/addlecturersalary/:id" element={<AddLecturerSalary />} />
 
 
-          <Route path="/employeedetails" element={<PlayerDetails />} />
-          <Route path="/userSalary" element={<PlayerSalaryForm />} />
+          <Route path="/workerdetails" element={<WorkerDetails />} />
+          <Route path="/workerSalary" element={<WorkerSalaryForm />} />
           <Route path="/addsalary/:id" element={<AddSalary />} />
           
         </Routes>

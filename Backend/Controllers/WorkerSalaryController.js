@@ -1,80 +1,80 @@
-const Employee = require("../Model/PlayerSalaryModel"); // Assuming the correct path and file name for the Employee model
+const WorkerSalary = require("../Model/WorkerSalaryModel");
 
-const getAllEmployees = async (req, res, next) => {
+const getAllWorkers = async (req, res, next) => {
   try {
-    const employees = await Employee.find();
-    res.status(200).json({ employees });
+    const workers = await WorkerSalary.find();
+    res.status(200).json({ workers });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
-const addEmployee = async (req, res, next) => {
+const addWorker = async (req, res, next) => {
   try {
-    // Check if the NIC already exists
-    const existingEmployee = await Employee.findOne({ nic: req.body.nic });
-    if (existingEmployee) {
-      return res.status(400).json({ message: "NIC already registered" });
+    // Check if the name already exists
+    const existingWorker = await WorkerSalary.findOne({ name: req.body.name });
+    if (existingWorker) {
+      return res.status(400).json({ message: "Worker name already registered" });
     }
 
-    // If NIC doesn't exist, create a new employee
-    const newEmployee = new Employee(req.body);
-    await newEmployee.save();
-    res.status(201).json({ newEmployee });
+    // If name doesn't exist, create a new worker
+    const newWorker = new WorkerSalary(req.body);
+    await newWorker.save();
+    res.status(201).json({ newWorker });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
-const getEmployeeById = async (req, res, next) => {
+const getWorkerById = async (req, res, next) => {
   try {
-    const employee = await Employee.findById(req.params.id);
-    if (!employee) {
-      return res.status(404).json({ message: "Employee not found" });
+    const worker = await WorkerSalary.findById(req.params.id);
+    if (!worker) {
+      return res.status(404).json({ message: "Worker not found" });
     }
-    res.status(200).json({ employee });
+    res.status(200).json({ worker });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
-const updateEmployee = async (req, res, next) => {
+const updateWorker = async (req, res, next) => {
   const id = req.params.id;
-  const { name, nic, position, bank, account, salary,bonus,total } = req.body;
+  const { name, position, type, month, date, salary, bonus, total } = req.body;
 
   try {
-    let employee = await Employee.findByIdAndUpdate(id, {
+    let worker = await WorkerSalary.findByIdAndUpdate(id, {
       name: name,
-      nic: nic,
       position: position,
-      bank: bank,
-      account: account,
+      type: type,
+      month: month,
+      date: date,
       salary: salary,
       bonus: bonus,
       total: total,
     });
     
-    if (!employee) {
-      return res.status(404).json({ message: "Unable to Update employee Details" });
+    if (!worker) {
+      return res.status(404).json({ message: "Unable to update worker details" });
     }
 
-    return res.status(200).json({ employee });
+    return res.status(200).json({ worker });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
-const deleteEmployee = async (req, res, next) => {
+const deleteWorker = async (req, res, next) => {
   try {
-    const deletedEmployee = await Employee.findByIdAndDelete(req.params.id);
-    if (!deletedEmployee) {
-      return res.status(404).json({ message: "Employee not found" });
+    const deletedWorker = await WorkerSalary.findByIdAndDelete(req.params.id);
+    if (!deletedWorker) {
+      return res.status(404).json({ message: "Worker not found" });
     }
-    res.status(200).json({ deletedEmployee });
+    res.status(200).json({ deletedWorker });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal Server Error" });
@@ -82,9 +82,9 @@ const deleteEmployee = async (req, res, next) => {
 };
 
 module.exports = {
-  getAllEmployees,
-  addEmployee,
-  getEmployeeById,
-  updateEmployee,
-  deleteEmployee,
+  getAllWorkers,
+  addWorker,
+  getWorkerById,
+  updateWorker,
+  deleteWorker,
 };

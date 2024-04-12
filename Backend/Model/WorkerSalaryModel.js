@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const EmployeeSchema = new Schema({
+const WorkerSalarySchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -15,7 +15,6 @@ const EmployeeSchema = new Schema({
     type: String,
     required: true,
   },
- 
   month: {
     type: String,
     required: true,
@@ -35,4 +34,4 @@ const EmployeeSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Employee", EmployeeSchema);
+module.exports = mongoose.model("WorkerSalary", WorkerSalarySchema);

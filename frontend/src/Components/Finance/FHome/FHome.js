@@ -14,10 +14,10 @@ function FHome() {
         </div>
         <div
           className="select_box"
-          onClick={() => (window.location.href = "/userSalary")}
+          onClick={() => (window.location.href = "/workerSalary")}
         >
           <img src={PlayerImg} alt="playerImage" className="imgicon" />
-          <h1>Player</h1>
+          <h1>Worker</h1>
         </div>
       </div>
     </div>

@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router";
-import { useNavigate } from "react-router";
+import { useParams, useNavigate } from "react-router-dom";
 
 const AddSalary = () => {
   const [inputs, setInputs] = useState({
     name: "",
-    nic: "",
     position: "",
-    bank: "",
-    account: "",
+    type: "",
+    month: "",
     salary: "",
     bonus: "",
     total: "",
@@ -18,18 +16,18 @@ const AddSalary = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    const fetchEmployee = async () => {
+    const fetchWorker = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/employees/${id}`
+          `http://localhost:8080/worker-salary/${id}`
         );
         const { data } = response;
-        setInputs(data.employee); // Assuming the response contains an 'employee' object
+        setInputs(data.worker);
       } catch (error) {
-        console.error("Error fetching employee data:", error);
+        console.error("Error fetching worker data:", error);
       }
     };
-    fetchEmployee();
+    fetchWorker();
   }, [id]);
 
   const handleChange = (e) => {
@@ -56,9 +54,9 @@ const AddSalary = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8080/employees/${id}`, inputs);
+      await axios.put(`http://localhost:8080/worker-salary/${id}`, inputs);
       window.alert("Salary added successfully!");
-      history("/employeedetails");
+      history("/workerdetails");
     } catch (error) {
       console.error("Error updating salary:", error);
     }
@@ -71,12 +69,12 @@ const AddSalary = () => {
           Add
           <span className="sub_topic_emp "> Salary</span>
         </h1>
-        <br></br>
+        <br />
         <form onSubmit={handleSubmit} className="emp_form">
           <label className="emp_lable_add" htmlFor="name">
             Name:
           </label>
-          <br></br>
+          <br />
           <input
             className="emp_input"
             type="text"
@@ -86,25 +84,11 @@ const AddSalary = () => {
             onChange={handleChange}
             readOnly
           />
-          <br></br>
-          <label className="emp_lable_add" htmlFor="nic">
-            NIC:
-          </label>
-          <br></br>
-          <input
-            className="emp_input"
-            type="text"
-            id="nic"
-            name="nic"
-            value={inputs.nic}
-            onChange={handleChange}
-            readOnly
-          />
-          <br></br>
+          <br />
           <label className="emp_lable_add" htmlFor="position">
             Position:
           </label>
-          <br></br>
+          <br />
           <input
             className="emp_input"
             type="text"
@@ -114,39 +98,39 @@ const AddSalary = () => {
             onChange={handleChange}
             readOnly
           />
-          <br></br>
-          <label className="emp_lable_add" htmlFor="bank">
-            Bank:
+          <br />
+          <label className="emp_lable_add" htmlFor="type">
+            Type:
           </label>
-          <br></br>
+          <br />
           <input
             className="emp_input"
             type="text"
-            id="bank"
-            name="bank"
-            value={inputs.bank}
+            id="type"
+            name="type"
+            value={inputs.type}
             onChange={handleChange}
             readOnly
           />
-          <br></br>
-          <label className="emp_lable_add" htmlFor="account">
-            Account:
+          <br />
+          <label className="emp_lable_add" htmlFor="month">
+            Month:
           </label>
-          <br></br>
+          <br />
           <input
             className="emp_input"
             type="text"
-            id="account"
-            name="account"
-            value={inputs.account}
+            id="month"
+            name="month"
+            value={inputs.month}
             onChange={handleChange}
             readOnly
           />
-          <br></br>
+          <br />
           <label className="emp_lable_add" htmlFor="salary">
             Salary:
           </label>
-          <br></br>
+          <br />
           <input
             className="emp_input"
             type="number"
@@ -156,11 +140,11 @@ const AddSalary = () => {
             onChange={handleChange}
             required
           />
-               <br></br>
-          <label className="emp_lable_add" htmlFor="salary">
+          <br />
+          <label className="emp_lable_add" htmlFor="bonus">
             Bonus:
           </label>
-          <br></br>
+          <br />
           <input
             className="emp_input"
             type="number"
@@ -170,11 +154,11 @@ const AddSalary = () => {
             onChange={handleChange}
             required
           />
-               <br></br>
-          <label className="emp_lable_add" htmlFor="salary">
+          <br />
+          <label className="emp_lable_add" htmlFor="total">
             Total:
           </label>
-          <br></br>
+          <br />
           <input
             className="emp_input"
             type="number"
@@ -183,7 +167,7 @@ const AddSalary = () => {
             value={inputs.total}
             readOnly
           />
-          <br></br> <br></br>
+          <br /> <br />
           <button type="submit" className="emp_form_button">
             Add Salary
           </button>

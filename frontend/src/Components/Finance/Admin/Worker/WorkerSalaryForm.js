@@ -2,53 +2,49 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import "../../Emp.css";
-function AddEmployee() {
+
+function WorkerSalaryForm() {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     name: "",
     position: "",
-    bank: "",
-    account: "",
-    nic: "",
-    gmail: "",
+    type: "",
+    month: "",
+    salary: "",
+    bonus: "",
+    total: "",
   });
+
   const handleChange = (e) => {
     setInputs((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputs);
     await sendRequest();
   };
 
   const sendRequest = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/employees", {
-        name: inputs.name,
-        position: inputs.position,
-        bank: inputs.bank,
-        account: inputs.account,
-        nic: inputs.nic,
-        gmail: inputs.gmail,
-      });
+      const response = await axios.post("http://localhost:8080/worker-salary", inputs);
       if (response.status === 201) {
-        window.alert("Register successful!");
-        navigate("/employeedetails");
+        window.alert("Registration successful!");
+        navigate("/workerdetails");
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        window.alert("NIC already registered");
+        window.alert("Worker name already registered");
       } else {
         console.error("Error:", error);
       }
     }
   };
 
-  const handleViewEmployees = () => {
-    navigate("/employeedetails");
+  const handleViewWorkers = () => {
+    navigate("/workerdetails");
   };
 
   return (
@@ -59,9 +55,9 @@ function AddEmployee() {
           <span className="sub_topic_emp "> Account</span>
         </h1>
         <p className="sub_topic_emp cen_sub">
-            <b>Player</b> Financial Account Create Section
-          </p>
-        <br></br>
+          <b>Worker</b> Financial Account Create Section
+        </p>
+        <br />
         <form onSubmit={handleSubmit} className="emp_form">
           <label className="emp_lable_add">Name</label>
           <br />
@@ -74,77 +70,48 @@ function AddEmployee() {
             required
           />
           <br />
-          <label className="emp_lable_add">Gmail</label>
-          <br />
-          <input
-            type="eail"
-            name="gmail"
-            value={inputs.gmail}
-            onChange={handleChange}
-            className="emp_input"
-            required
-          />
-          <br />
-          <label className="emp_lable_add">NIC</label>
+          <label className="emp_lable_add">Position</label>
           <br />
           <input
             type="text"
-            name="nic"
-            value={inputs.nic}
-            onChange={handleChange}
-            className="emp_input"
-            required
-          />
-          <br />
-          <label className="emp_lable_add">Position</label>
-          <br />
-          <select
             name="position"
             value={inputs.position}
             onChange={handleChange}
             className="emp_input"
             required
-          >
-            <option value="">Select Position</option>
-            <option value="Batsmen">Batsmen</option>
-            <option value="Bowlers">Bowlers</option>
-            <option value="Wicketkeeper">Wicketkeeper</option>
-            <option value="Captain">Captain</option>
-            <option value="Fielders">Fielders</option>
-            <option value="Substitutes">Substitutes</option>
-          </select>
-
+          />
           <br />
-          <label className="emp_lable_add">Bank Name</label>
+          <label className="emp_lable_add">Type</label>
           <br />
           <input
             type="text"
-            name="bank"
-            value={inputs.bank}
+            name="type"
+            value={inputs.type}
             onChange={handleChange}
             className="emp_input"
             required
           />
           <br />
-          <label className="emp_lable_add">Account Number</label>
+          <label className="emp_lable_add">Month</label>
           <br />
           <input
             type="text"
-            name="account"
-            value={inputs.account}
+            name="month"
+            value={inputs.month}
             onChange={handleChange}
             className="emp_input"
             required
           />
           <br />
-
+          
+          <br />
           <br />
           <button type="submit" className="emp_form_button">
             Create Account
           </button>
           <p className="go_acc">
             If Do You Have Already Account{" "}
-            <span onClick={handleViewEmployees} className="go_acc_sub">
+            <span onClick={handleViewWorkers} className="go_acc_sub">
               Click Here
             </span>
           </p>
@@ -154,4 +121,4 @@ function AddEmployee() {
   );
 }
 
-export default AddEmployee;
+export default WorkerSalaryForm;
