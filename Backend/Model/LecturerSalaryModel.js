@@ -2,28 +2,24 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const EmployeeSchema = new Schema({
+const LecturerSchema = new Schema({
   name: {
     type: String,
     required: true,
   },
-  position: {
+  module: {
     type: String,
     required: true,
   },
-  bank: {
-    type: String,
-    required: true,
-  },
-  account: {
-    type: String,
-    required: true,
-  },
-  nic: {
+  type: {
     type: String,
     required: true,
   },
   gmail: {
+    type: String,
+    required: true,
+  },
+  month: {
     type: String,
     required: true,
   },
@@ -42,4 +38,4 @@ const EmployeeSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("CoachSalary", EmployeeSchema);
+module.exports = mongoose.model("LecturerSalary", LecturerSchema);

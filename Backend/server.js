@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const employeeRoute = require("./routes/PlayerSalaryRoute");
-const coachRoute = require("./routes/CoachSalaryRoute");
+const lecturerSalaryRoute = require("./Routes/LecturerSalaryRoute");
 const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Routes
 app.use("/employees", employeeRoute);
-app.use("/coach", coachRoute);
+app.use("/lecturer-salary", lecturerSalaryRoute);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

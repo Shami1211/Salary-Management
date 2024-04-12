@@ -1,53 +1,63 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import "../Emp.css";
-function CoachSalaryForm() {
+//import "../Emp.css";
+
+function LecturerSalaryForm() {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     name: "",
-    position: "",
-    bank: "",
-    account: "",
-    nic: "",
+    module: "",
+    type: "",
     gmail: "",
+    month: "",
+    salary: "",
+    bonus: "",
+    total: "",
   });
+
   const handleChange = (e) => {
     setInputs((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputs);
     await sendRequest();
   };
+
   const sendRequest = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/coach", {
+      const response = await axios.post("http://localhost:8080/lecturer-salary", {
         name: inputs.name,
-        position: inputs.position,
-        bank: inputs.bank,
-        account: inputs.account,
-        nic: inputs.nic,
+        module: inputs.module,
+        type: inputs.type,
         gmail: inputs.gmail,
+        month: inputs.month,
+        salary: inputs.salary,
+        bonus: inputs.bonus,
+        total: inputs.total,
       });
+
       if (response.status === 201) {
-        window.alert("Register successful!");
-        navigate("/coachdetails");
+        window.alert("Registration successful!");
+        navigate("/lecturer-details");
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        window.alert("NIC already registered");
+        window.alert("Email already registered");
       } else {
         console.error("Error:", error);
       }
     }
   };
-  const handleViewEmployees = () => {
-    navigate("/coachdetails");
+
+  const handleViewLecturers = () => {
+    navigate("/lecturer-details");
   };
+
   return (
     <div>
       <div className="emp_container">
@@ -57,7 +67,7 @@ function CoachSalaryForm() {
             <span className="sub_topic_emp "> Account</span>
           </h1>
           <p className="sub_topic_emp cen_sub">
-            <b>Coach</b> Financial Account Create Section
+            <b>Lecturer</b> Financial Account Create Section
           </p>
           <br></br>
           <form onSubmit={handleSubmit} className="emp_form">
@@ -72,10 +82,32 @@ function CoachSalaryForm() {
               required
             />
             <br />
+            <label className="emp_lable_add">Module</label>
+            <br />
+            <input
+              type="text"
+              name="module"
+              value={inputs.module}
+              onChange={handleChange}
+              className="emp_input"
+              required
+            />
+            <br />
+            <label className="emp_lable_add">Type</label>
+            <br />
+            <input
+              type="text"
+              name="type"
+              value={inputs.type}
+              onChange={handleChange}
+              className="emp_input"
+              required
+            />
+            <br />
             <label className="emp_lable_add">Gmail</label>
             <br />
             <input
-              type="eail"
+              type="email"
               name="gmail"
               value={inputs.gmail}
               onChange={handleChange}
@@ -83,63 +115,36 @@ function CoachSalaryForm() {
               required
             />
             <br />
-            <label className="emp_lable_add">NIC</label>
+            <label className="emp_lable_add">Month</label>
             <br />
             <input
               type="text"
-              name="nic"
-              value={inputs.nic}
+              name="month"
+              value={inputs.month}
               onChange={handleChange}
               className="emp_input"
               required
             />
             <br />
-            <label className="emp_lable_add">Position</label>
-            <br />
-            <select
-              name="position"
-              value={inputs.position}
-              onChange={handleChange}
-              className="emp_input"
-              required
-            >
-              <option value="">Select Position</option>
-              <option value="level1">Level 1</option>
-              <option value="level2">Level 2</option>
-              <option value="level3">Level 3</option>
-            </select>
-
-            <br />
-            <label className="emp_lable_add">Bank Name</label>
+            <label className="emp_lable_add">Date</label>
             <br />
             <input
-              type="text"
-              name="bank"
-              value={inputs.bank}
+              type="date"
+              name="date"
+              value={inputs.date}
               onChange={handleChange}
               className="emp_input"
               required
             />
             <br />
-            <label className="emp_lable_add">Account Number</label>
-            <br />
-            <input
-              type="text"
-              name="account"
-              value={inputs.account}
-              onChange={handleChange}
-              className="emp_input"
-              required
-            />
-            <br />
-
+            
             <br />
             <button type="submit" className="emp_form_button">
               Create Account
             </button>
             <p className="go_acc">
-              If Do You Have Already Account
-              <span onClick={handleViewEmployees} className="go_acc_sub">
+              If you already have an account,
+              <span onClick={handleViewLecturers} className="go_acc_sub">
                 Click Here
               </span>
             </p>
@@ -150,4 +155,4 @@ function CoachSalaryForm() {
   );
 }
 
-export default CoachSalaryForm;
+export default LecturerSalaryForm;

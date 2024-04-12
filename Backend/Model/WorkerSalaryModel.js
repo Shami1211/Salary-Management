@@ -11,19 +11,12 @@ const EmployeeSchema = new Schema({
     type: String,
     required: true,
   },
-  bank: {
+  type: {
     type: String,
     required: true,
   },
-  account: {
-    type: String,
-    required: true,
-  },
-  nic: {
-    type: String,
-    required: true,
-  },
-  gmail: {
+ 
+  month: {
     type: String,
     required: true,
   },

@@ -1,35 +1,37 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router";
-import { useNavigate } from "react-router";
+import { useParams, useNavigate } from "react-router";
 
-function AddCoachSalary() {
+function AddLectureSalary() {
   const [inputs, setInputs] = useState({
     name: "",
-    nic: "",
-    position: "",
-    bank: "",
-    account: "",
+    module: "",
+    type: "",
+    gmail: "",
+    month: "",
     salary: "",
     bonus: "",
     total: "",
+    date: "", // Added date field
   });
   const history = useNavigate();
   const { id } = useParams();
+
   useEffect(() => {
-    const fetchEmployee = async () => {
+    const fetchLecturer = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/coach/${id}`
+          `http://localhost:8080/lecturer-salary/${id}`
         );
         const { data } = response;
-        setInputs(data.coach); // Assuming the response contains an 'employee' object
+        setInputs(data.lecturer);
       } catch (error) {
-        console.error("Error fetching employee data:", error);
+        console.error("Error fetching lecturer data:", error);
       }
     };
-    fetchEmployee();
+    fetchLecturer();
   }, [id]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -52,16 +54,18 @@ function AddCoachSalary() {
       }));
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8080/coach/${id}`, inputs);
+      await axios.put(`http://localhost:8080/lecturer-salary/${id}`, inputs);
       window.alert("Salary added successfully!");
-      history("/coachdetails");
+      history("/lecturer-details");
     } catch (error) {
       console.error("Error updating salary:", error);
     }
   };
+
   return (
     <div>
       <div className="emp_container">
@@ -70,12 +74,12 @@ function AddCoachSalary() {
             Add
             <span className="sub_topic_emp "> Salary</span>
           </h1>
-          <br></br>
+          <br />
           <form onSubmit={handleSubmit} className="emp_form">
             <label className="emp_lable_add" htmlFor="name">
               Name:
             </label>
-            <br></br>
+            <br />
             <input
               className="emp_input"
               type="text"
@@ -85,67 +89,67 @@ function AddCoachSalary() {
               onChange={handleChange}
               readOnly
             />
-            <br></br>
-            <label className="emp_lable_add" htmlFor="nic">
-              NIC:
+            <br />
+            <label className="emp_lable_add" htmlFor="module">
+              Module:
             </label>
-            <br></br>
+            <br />
             <input
               className="emp_input"
               type="text"
-              id="nic"
-              name="nic"
-              value={inputs.nic}
+              id="module"
+              name="module"
+              value={inputs.module}
               onChange={handleChange}
               readOnly
             />
-            <br></br>
-            <label className="emp_lable_add" htmlFor="position">
-              Position:
+            <br />
+            <label className="emp_lable_add" htmlFor="type">
+              Type:
             </label>
-            <br></br>
+            <br />
             <input
               className="emp_input"
               type="text"
-              id="position"
-              name="position"
-              value={inputs.position}
+              id="type"
+              name="type"
+              value={inputs.type}
               onChange={handleChange}
               readOnly
             />
-            <br></br>
-            <label className="emp_lable_add" htmlFor="bank">
-              Bank:
+            <br />
+            <label className="emp_lable_add" htmlFor="gmail">
+              Gmail:
             </label>
-            <br></br>
+            <br />
+            <input
+              className="emp_input"
+              type="email"
+              id="gmail"
+              name="gmail"
+              value={inputs.gmail}
+              onChange={handleChange}
+              readOnly
+            />
+            <br />
+            <label className="emp_lable_add" htmlFor="month">
+              Month:
+            </label>
+            <br />
             <input
               className="emp_input"
               type="text"
-              id="bank"
-              name="bank"
-              value={inputs.bank}
+              id="month"
+              name="month"
+              value={inputs.month}
               onChange={handleChange}
               readOnly
             />
-            <br></br>
-            <label className="emp_lable_add" htmlFor="account">
-              Account:
-            </label>
-            <br></br>
-            <input
-              className="emp_input"
-              type="text"
-              id="account"
-              name="account"
-              value={inputs.account}
-              onChange={handleChange}
-              readOnly
-            />
-            <br></br>
+            <br />
             <label className="emp_lable_add" htmlFor="salary">
               Salary:
             </label>
-            <br></br>
+            <br />
             <input
               className="emp_input"
               type="number"
@@ -155,11 +159,11 @@ function AddCoachSalary() {
               onChange={handleChange}
               required
             />
-            <br></br>
-            <label className="emp_lable_add" htmlFor="salary">
+            <br />
+            <label className="emp_lable_add" htmlFor="bonus">
               Bonus:
             </label>
-            <br></br>
+            <br />
             <input
               className="emp_input"
               type="number"
@@ -169,11 +173,11 @@ function AddCoachSalary() {
               onChange={handleChange}
               required
             />
-            <br></br>
-            <label className="emp_lable_add" htmlFor="salary">
+            <br />
+            <label className="emp_lable_add" htmlFor="total">
               Total:
             </label>
-            <br></br>
+            <br />
             <input
               className="emp_input"
               type="number"
@@ -182,7 +186,9 @@ function AddCoachSalary() {
               value={inputs.total}
               readOnly
             />
-            <br></br> <br></br>
+            <br />
+            
+            <br /> <br />
             <button type="submit" className="emp_form_button">
               Add Salary
             </button>
@@ -193,4 +199,4 @@ function AddCoachSalary() {
   );
 }
 
-export default AddCoachSalary;
+export default AddLectureSalary;

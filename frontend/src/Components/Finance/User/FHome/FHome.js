@@ -7,10 +7,10 @@ function FHome() {
       <div className="emp_container">
         <div
           className="select_box"
-          onClick={() => (window.location.href = "/coachSalary")}
+          onClick={() => (window.location.href = "/lecturerSalary")}
         >
           <img src={Coachimg} alt="CoachImage" className="imgicon" />
-          <h1>Coach</h1>
+          <h1>Lecturer</h1>
         </div>
         <div
           className="select_box"
