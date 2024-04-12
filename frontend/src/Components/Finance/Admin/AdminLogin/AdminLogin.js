@@ -18,7 +18,7 @@ export default function AdminLogin() {
     if (username === "admin" && password === "123") {
       // Valid credentials, you can redirect or perform any other action here
       alert("Admin Login successful");
-      window.location.href = "/adminDash";
+      window.location.href = "/home";
     } else {
       alert("Invalid username or password");
     }

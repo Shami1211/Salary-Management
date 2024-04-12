@@ -35,7 +35,7 @@ function CoachSalaryForm() {
       });
       if (response.status === 201) {
         window.alert("Register successful!");
-        navigate("/coachvalidates");
+        navigate("/coachdetails");
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -46,7 +46,7 @@ function CoachSalaryForm() {
     }
   };
   const handleViewEmployees = () => {
-    navigate("/coachvalidates");
+    navigate("/coachdetails");
   };
   return (
     <div>

@@ -36,7 +36,7 @@ function AddEmployee() {
       });
       if (response.status === 201) {
         window.alert("Register successful!");
-        navigate("/employeevalidates");
+        navigate("/employeedetails");
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -48,7 +48,7 @@ function AddEmployee() {
   };
 
   const handleViewEmployees = () => {
-    navigate("/employeevalidates");
+    navigate("/employeedetails");
   };
 
   return (
