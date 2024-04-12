@@ -19,6 +19,13 @@ function FHome() {
           <img src={PlayerImg} alt="playerImage" className="imgicon" />
           <h1>Worker</h1>
         </div>
+        <div
+          className="select_box"
+          onClick={() => (window.location.href = "/overview")}
+        >
+         
+          <h1>View Chart</h1>
+        </div>
       </div>
     </div>
   );

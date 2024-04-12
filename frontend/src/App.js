@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router";
 //Admin Dashboard
 import AdminLogin from "./Components/Finance/Admin/AdminLogin/AdminLogin";
 import FHome from "./Components/Finance/FHome/FHome";
+import Overview from "./Components/Finance/Overview";
 
 //Worker
 import WorkerSalaryForm from "./Components/Finance/Admin/Worker/WorkerSalaryForm";
@@ -23,7 +24,7 @@ function App() {
           {/*User*/}
           <Route path="/" element={<AdminLogin />} />
           <Route path="/home" element={<FHome />} />
-          
+          <Route path="/overview" element={<Overview />} />
 
           <Route path="/lecturerSalary" element={<LecturerSalaryForm />} />
           <Route path="/lecturer-details" element={<LecturerDetails />} />
